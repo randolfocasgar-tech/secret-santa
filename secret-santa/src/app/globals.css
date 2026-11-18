@@ -1,0 +1,86 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-fraunces), ui-serif, Georgia, serif;
+
+  --color-paper: #faf7f2;
+  --color-card: #ffffff;
+  --color-line: #e7e1d6;
+  --color-ink: #17251d;
+  --color-muted: #5a6a60;
+
+  --color-pine-50: #f0f6f2;
+  --color-pine-100: #dcebe1;
+  --color-pine-200: #b9d6c3;
+  --color-pine-500: #2f7350;
+  --color-pine-600: #23603f;
+  --color-pine-700: #1b4d33;
+  --color-pine-800: #143c28;
+  --color-pine-900: #0e2b1d;
+
+  --color-berry-50: #fcefed;
+  --color-berry-100: #f8dcd8;
+  --color-berry-500: #d2412f;
+  --color-berry-600: #b93424;
+  --color-berry-700: #962a1d;
+
+  --color-gold-100: #f6ecd4;
+  --color-gold-500: #c9a24a;
+}
+
+html {
+  color-scheme: light;
+}
+
+body {
+  background: var(--color-paper);
+  color: var(--color-ink);
+}
+
+/* Foco visible y consistente para navegación con teclado. */
+:focus-visible {
+  outline: 3px solid var(--color-berry-500);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+dialog::backdrop {
+  background: rgb(14 43 29 / 0.45);
+  backdrop-filter: blur(2px);
+}
+
+/* ---------- Revelado de la tarjeta de regalo ---------- */
+@keyframes gift-shake {
+  0%, 100% { transform: rotate(0deg); }
+  20% { transform: rotate(-4deg); }
+  40% { transform: rotate(4deg); }
+  60% { transform: rotate(-3deg); }
+  80% { transform: rotate(2deg); }
+}
+@keyframes lid-open {
+  0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+  100% { transform: translateY(-120%) rotate(-14deg); opacity: 0; }
+}
+@keyframes reveal-up {
+  0% { transform: translateY(16px) scale(0.97); opacity: 0; }
+  100% { transform: translateY(0) scale(1); opacity: 1; }
+}
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@utility anim-shake { animation: gift-shake 0.6s ease-in-out; }
+@utility anim-lid { animation: lid-open 0.55s cubic-bezier(0.5, 0, 0.75, 0) forwards; }
+@utility anim-reveal { animation: reveal-up 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) both; }
+@utility anim-fade { animation: fade-in 0.3s ease-out both; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
